@@ -1,0 +1,25 @@
+umm pokemon
+soo two differenct pokemon there
+so turn based 
+then what
+one can atack some randome move they hvae
+
+
+then turn changes to the other pokemon
+they choose some random move
+
+
+atttacks reduce hp
+heal improves hp
+
+defence reduces next attack that the other enemy does
+
+
+3 moves attack heal defence
+
+critical chance 10 percent chace to do 200 percent damage
+
+
+check if faint till that run the game 
+if one wins print winner as someone who still stands
+
