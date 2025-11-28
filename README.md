@@ -1,40 +1,38 @@
-Pokémon Battle Simulator (C++)
+# Pokémon Battle Simulator (C++)
 
-A simple command-line Pokémon-style battle game built in C++.
-Two Pokémon take turns using moves like Attack, Heal, and Defend until one of them faints.
+A simple command-line Pokémon-style battle game built in C++.  
+Two Pokémon take turns using moves like **Attack**, **Heal**, and **Defend** until one of them faints.
 
-The goal of this project is to practice basic C++, OOP concepts, and game logic, while keeping the gameplay fun and easy to follow.
+---
 
-🧩 How the Game Works
+## 🧩 How the Game Works
+- Each Pokémon has:
+  - Name  
+  - Max HP  
+  - Current HP  
+  - Attack power  
+  - Defense value  
 
-Each Pokémon starts with a name, maximum HP, attack power, and defense value.
+- Each turn, the player chooses one of three moves:
+  - **Attack** – deals damage (10% chance for a critical hit that does double damage)  
+  - **Heal** – restores HP up to the Pokémon's max  
+  - **Defend** – reduces the damage of the next attack received  
 
-Each turn, the player chooses one of three moves:
+- The enemy Pokémon picks moves randomly.
+- The fight continues until one Pokémon’s HP hits zero.
+- The surviving Pokémon is declared the winner.
 
-Attack → deals damage (with a 10% chance to land a critical hit for double damage)
+---
 
-Heal → restores some HP (cannot exceed max HP)
+## 🎯 Project Purpose
+This project was created to practice:
+- C++ fundamentals  
+- Object-oriented programming  
+- Simple game logic and turn-based mechanics  
+- Designing small systems from scratch  
 
-Defend → reduces the next incoming attack
+---
 
-The opponent Pokémon picks a random move each turn.
-
-The battle continues until one Pokémon’s HP reaches zero and faints.
-
-The game announces the winner at the end.
-
-🎯 Project Purpose
-
-This project is meant to strengthen:
-
-C++ fundamentals
-
-Object-oriented programming
-
-Thinking in terms of game flow and state
-
-Designing simple systems from scratch
-
-🕹️ Status
-
-This is a small learning project, made for fun and for practicing how to write clean and understandable C++ code while building a simple turn-based battle system.
+## 🕹️ Status
+A small, fun learning project focused on gameplay rather than complexity.  
+Designed to help build confidence in writing C++ code independently.
