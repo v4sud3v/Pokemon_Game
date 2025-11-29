@@ -1,21 +1,27 @@
 #include "Pokemon.h"
-#include <iostream>
 
-Pokemon::Pokemon(const std::string& name, int maxhp, int attack, int defense)
+#include <iostream>
+#include <utility>
+
+#include "Moves.h"
+
+Pokemon::Pokemon(const std::string& name, int maxhp, int attack, int defense, Moves moveset)
     : name(name),
       maxhp(maxhp),
       attack(attack),
       defense(defense),
       currenthp(maxhp),
-      fainted(false)
+      fainted(false),
+      moveset_(std::move(moveset))
 {
 }
-Pokemon::~Pokemon() {}
 
-void Pokemon::use_attack(Pokemon& target) {
-    std::cout << name << " used" << attack<< std::endl;
-    target.receive_damage(attack);
+Pokemon::~Pokemon() = default;
 
+void Pokemon::use_attack(Pokemon& target, std::size_t move_index) {
+    const auto& move = moveset_.at(move_index);
+    std::cout << name << " used " << move.name << std::endl;
+    target.receive_damage(move.power);
 }
 
 void Pokemon::receive_damage(int damage) {
@@ -38,7 +44,7 @@ bool Pokemon::is_fainted() const {
     return fainted;
 }
 
-void Pokemon::display_status() {
+void Pokemon::display_status() const {
     std::cout << "Pokemon: " << name << std::endl;
     std::cout << "HP: " << currenthp << "/" << maxhp << std::endl;
     std::cout << "Attack: " << attack << std::endl;

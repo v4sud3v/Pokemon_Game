@@ -1,22 +1,24 @@
 #pragma once
-
+#include "Moves.h"
+#include <cstddef>
 #include <string>
 
 class Pokemon {
 public:
-
-    Pokemon(const std::string& name, int maxhp, int attack, int defense);
+    Pokemon(const std::string& name, int maxhp, int attack, int defense, Moves moveset);
     ~Pokemon();
-    void use_attack(Pokemon& target);
+
+    void use_attack(Pokemon& target, std::size_t move_index);
     void receive_damage(int damage);
     bool is_fainted() const;
-    void display_status();
+    void display_status() const;
 
 private:
-    bool fainted;
     std::string name;
     int maxhp;
     int attack;
     int defense;
     int currenthp;
+    bool fainted;
+    Moves moveset_;
 };
