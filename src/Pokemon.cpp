@@ -51,3 +51,19 @@ void Pokemon::display_status() const {
     std::cout << "Defense: " << defense << std::endl;
     std::cout << "Status: " << (fainted ? "Fainted" : "Active") << std::endl;
 }
+
+const std::string& Pokemon::get_name() const {
+    return name;
+}
+
+std::size_t Pokemon::get_moveset_size() const {
+    return moveset_.size();
+}
+
+const std::string& Pokemon::get_move_name(std::size_t index) const {
+    return moveset_.at(index).name;
+}
+
+int Pokemon::get_move_power(std::size_t index) const {
+    return moveset_.at(index).power;
+}
