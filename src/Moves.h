@@ -5,12 +5,19 @@
 #include <string>
 #include <vector>
 
+enum class MoveType {
+    ATTACK,
+    DEFENSE,
+    HEAL
+};
+
 class Moves {
 public:
     struct Entry {
         std::string name;
         int power;
         std::string type;
+        MoveType moveType;
     };
 
     Moves(std::initializer_list<Entry> entries);

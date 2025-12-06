@@ -12,31 +12,58 @@ Pokemon::Pokemon(const std::string& name, int maxhp, int attack, int defense, Mo
       defense(defense),
       currenthp(maxhp),
       fainted(false),
-      moveset_(std::move(moveset))
+      moveset_(std::move(moveset)),
+      defense_buff(0)
 {
 }
 
 Pokemon::~Pokemon() = default;
 
-void Pokemon::use_attack(Pokemon& target, std::size_t move_index) {
+void Pokemon::use_move(Pokemon& target, std::size_t move_index) {
     const auto& move = moveset_.at(move_index);
-    std::cout << name << " used " << move.name << std::endl;
-    target.receive_damage(move.power);
+    std::cout << name << " used " << move.name << "!" << std::endl;
+    
+    switch (move.moveType) {
+        case MoveType::ATTACK:
+            target.receive_damage(move.power);
+            break;
+            
+        case MoveType::DEFENSE:
+            defense_buff = move.power;
+            std::cout << name << "'s defense increased by " << defense_buff << " for this turn!" << std::endl;
+            break;
+            
+        case MoveType::HEAL:
+            currenthp += move.power;
+            if (currenthp > maxhp) {
+                currenthp = maxhp;
+            }
+            std::cout << name << " restored " << move.power << " HP!" << std::endl;
+            break;
+    }
 }
 
 void Pokemon::receive_damage(int damage) {
-    int damage_taken = damage - defense;
+    int effective_defense = defense + defense_buff;
+    int damage_taken = damage - effective_defense;
     if (damage_taken < 0) {
         damage_taken = 0;
     }
-    if (!fainted || currenthp - damage_taken < 0) {
-        currenthp -= damage_taken;
-    }
+    
+    currenthp -= damage_taken;
     std::cout << name << " received " << damage_taken << " damage!" << std::endl;
+    
     if (currenthp <= 0) {
         fainted = true;
         currenthp = 0;
         std::cout << name << " has fainted!" << std::endl;
+    }
+}
+
+void Pokemon::clear_defense_buff() {
+    if (defense_buff > 0) {
+        std::cout << name << "'s defense buff wore off." << std::endl;
+        defense_buff = 0;
     }
 }
 
@@ -48,7 +75,11 @@ void Pokemon::display_status() const {
     std::cout << "Pokemon: " << name << std::endl;
     std::cout << "HP: " << currenthp << "/" << maxhp << std::endl;
     std::cout << "Attack: " << attack << std::endl;
-    std::cout << "Defense: " << defense << std::endl;
+    std::cout << "Defense: " << defense;
+    if (defense_buff > 0) {
+        std::cout << " (+" << defense_buff << " buff)";
+    }
+    std::cout << std::endl;
     std::cout << "Status: " << (fainted ? "Fainted" : "Active") << std::endl;
 }
 
@@ -66,4 +97,8 @@ const std::string& Pokemon::get_move_name(std::size_t index) const {
 
 int Pokemon::get_move_power(std::size_t index) const {
     return moveset_.at(index).power;
+}
+
+MoveType Pokemon::get_move_type(std::size_t index) const {
+    return moveset_.at(index).moveType;
 }
