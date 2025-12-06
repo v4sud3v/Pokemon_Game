@@ -1,38 +1,56 @@
 # Pokémon Battle Simulator (C++)
 
-A simple command-line Pokémon-style battle game built in C++.  
-Two Pokémon take turns using moves like **Attack**, **Heal**, and **Defend** until one of them faints.
+A command-line Pokémon-style battle game built in C++.  
+Choose your Pokémon, face a random opponent, and battle using different move types until one faints.
 
 ---
 
 ## 🧩 How the Game Works
-- Each Pokémon has:
-  - Name  
-  - Max HP  
-  - Current HP  
-  - Attack power  
-  - Defense value  
+- **Pokémon Selection**: Choose from 4 starter Pokémon (Pikachu, Bulbasaur, Charmander, Squirtle)
+- **Random Opponent**: The game randomly selects an opponent from the remaining Pokémon
+- **Turn-Based Combat**: Player and opponent alternate turns until one Pokémon faints
 
-- Each turn, the player chooses one of three moves:
-  - **Attack** – deals damage (10% chance for a critical hit that does double damage)  
-  - **Heal** – restores HP up to the Pokémon's max  
-  - **Defend** – reduces the damage of the next attack received  
+### Pokémon Stats
+Each Pokémon has:
+- **Name**
+- **Max HP** (Health Points)
+- **Current HP**
+- **Attack Power**
+- **Defense Value**
+- **Moveset** (4 unique moves)
 
-- The enemy Pokémon picks moves randomly.
-- The fight continues until one Pokémon’s HP hits zero.
-- The surviving Pokémon is declared the winner.
+### Move Types
+Each Pokémon has access to 4 moves with different types:
+
+1. **Attack Moves** 🗡️
+   - Deals damage to the opponent
+   - Damage calculation: `damage_taken = move_power - target_defense`
+   - Minimum damage is 0 (high defense can negate weak attacks)
+
+2. **Defense Moves 🛡️**
+   - Temporarily boosts the user's defense for one turn
+   - Defense buff = move power
+   - Increases effective defense during damage calculation
+   - Buff clears at the start of the next turn
+
+3. **Heal Moves 💚**
+   - Restores HP based on move power
+   - Cannot exceed max HP
+   - Strategic for prolonging battles
 
 ---
 
-## 🎯 Project Purpose
-This project was created to practice:
-- C++ fundamentals  
-- Object-oriented programming  
-- Simple game logic and turn-based mechanics  
-- Designing small systems from scratch  
+## 🎮 Gameplay Flow
+
+1. **Select Your Pokémon** from the roster
+2. **Battle Start** - Face your randomly chosen opponent
+3. **Each Turn**:
+   - View both Pokémon's current status (HP, Attack, Defense, buffs)
+   - Choose one of your 4 moves
+   - Opponent randomly selects a move
+   - Defense buffs clear at the start of each new turn
+4. **Victory Condition** - First Pokémon to reach 0 HP faints and loses
 
 ---
 
-## 🕹️ Status
-A small, fun learning project focused on gameplay rather than complexity.  
-Designed to help build confidence in writing C++ code independently.
+## 🏗️ Project Structure
