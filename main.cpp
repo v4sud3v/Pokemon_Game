@@ -119,7 +119,11 @@ void battle(Pokemon& player, Pokemon& opponent) {
         
         // Player's turn
         std::cout << "\n--- Your Turn ---\n";
+        std::cout << "\n[Your Pokemon]\n";
         player.display_status();
+        std::cout << "\n[Opponent Pokemon]\n";
+        opponent.display_status();
+        
         display_move_menu(player);
         
         int move_choice = get_player_choice(player.get_moveset_size());
